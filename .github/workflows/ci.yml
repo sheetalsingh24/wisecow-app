@@ -1,22 +1,23 @@
-name: CI
+name: Build and Push Docker Image
 
 on:
   push:
     branches:
-      - main # or your main branch name
+      - main
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-    - name: Build and push Docker image
-      run: |
-        docker build -t sheetalsingh2421/wisecow_img:latest .
-        docker push sheetalsingh2421/wisecow_img:latest
+      - name: Build Docker image
+        run: docker build -t docker.io/sheetalsingh2421/wisecow_img .
+
+      - name: Push Docker image
+        run: docker push docker.io/sheetalsingh2421/wisecow_img
