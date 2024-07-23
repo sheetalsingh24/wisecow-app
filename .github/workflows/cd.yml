@@ -1,4 +1,4 @@
-name: Deploy to Kubernetes
+name: Continuous Deployment
 
 on:
   push:
@@ -26,11 +26,13 @@ jobs:
         run: |
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
 
-      - name: Check KUBECONFIG File
+      - name: Verify KUBECONFIG File
         run: |
           cat $HOME/.kube/config
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
+          kubectl apply -f wisecow-deployment.yaml
+          kubectl apply -f wisecow-service.yaml
+
+      
