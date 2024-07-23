@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-SRVPORT=4499
+SRVPORT=8080
 RSPFILE=response
 
 rm -f $RSPFILE
 mkfifo $RSPFILE
 
 get_api() {
-	read line
-	echo $line
-}
+		read line
+			echo $line
+		}
 
 handleRequest() {
     # 1) Process the request
