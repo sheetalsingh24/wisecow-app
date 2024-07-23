@@ -22,11 +22,13 @@ jobs:
         run: |
           mkdir -p $HOME/.kube
 
-      - name: Configure kubectl
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      - name: Decode KUBECONFIG
         run: |
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+
+      - name: Check KUBECONFIG File
+        run: |
+          cat $HOME/.kube/config
 
       - name: Deploy to Kubernetes
         run: |
