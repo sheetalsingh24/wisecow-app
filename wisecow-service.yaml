@@ -9,7 +9,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80             # Port on which the service will be exposed internally
-      targetPort: 8080     # Port on which the container is listening
+      targetPort: 80     # Port on which the container is listening
       nodePort: 30000      # Port on which the service will be accessible externally
 
 
