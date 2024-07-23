@@ -8,6 +8,6 @@ spec:
     app: wisecow
   ports:
     - protocol: TCP
-      port: 8081            # Port on which the service will be exposed internally
+      port: 8080            # Port on which the service will be exposed internally
       targetPort: 8081    # Port on which the container is listening
 
