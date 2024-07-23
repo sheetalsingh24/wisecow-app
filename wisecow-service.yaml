@@ -9,5 +9,5 @@ spec:
   ports:
     - protocol: TCP
       port: 8080            # Port on which the service will be exposed internally
-      targetPort: 8081    # Port on which the container is listening
+      targetPort: 8080   # Port on which the container is listening
 
