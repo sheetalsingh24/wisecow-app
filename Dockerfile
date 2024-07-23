@@ -20,8 +20,8 @@ COPY wisecow.sh .
 # Make the script executable
 RUN chmod +x wisecow.sh
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8080
+EXPOSE 8080
 
 # Define the command to run the script
 CMD ["./wisecow.sh"]
