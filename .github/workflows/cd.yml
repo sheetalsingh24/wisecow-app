@@ -17,11 +17,15 @@ jobs:
         run: echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
 
       - name: Install kubectl
-        uses: azure/setup-kubectl@v2
-        with:
-          version: 'v1.24.0'  # Specify the kubectl version you need
+        run: |
+          curl -LO "https://dl.k8s.io/release/v1.24.0/bin/linux/amd64/kubectl"
+          chmod +x ./kubectl
+          sudo mv ./kubectl /usr/local/bin/kubectl
+          kubectl version --client
 
       - name: Apply Kubernetes Deployment
         run: |
           kubectl apply -f wisecow-app/wisecow-deployment.yaml
           kubectl apply -f wisecow-app/wisecow-service.yaml
+
+  
