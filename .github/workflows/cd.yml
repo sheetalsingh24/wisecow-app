@@ -13,9 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Create .kube Directory
+        run: mkdir -p $HOME/.kube
+
       - name: Set up Kubeconfig
         run: |
-          mkdir -p $HOME/.kube
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
 
       - name: Install kubectl
