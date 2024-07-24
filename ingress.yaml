@@ -4,6 +4,7 @@ metadata:
   name: wisecow-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   rules:
   - host: a0a089d4501624a579cc78c98c9e7285-2027520448.eu-north-1.elb.amazonaws.com
@@ -15,7 +16,7 @@ spec:
           service:
             name: wisecow-service
             port:
-              number: 80
+              number: 8080
   tls:
   - hosts:
     - a0a089d4501624a579cc78c98c9e7285-2027520448.eu-north-1.elb.amazonaws.com
