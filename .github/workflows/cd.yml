@@ -28,9 +28,11 @@ jobs:
         run: |
           kubectl apply -f wisecow-deployment.yaml
           kubectl apply -f wisecow-service.yaml
+          kubectl apply -f ingress.yaml
 
       - name: Verify Deployment
         run: |
           kubectl rollout status deployment/wisecow-deployment
           kubectl get pods
           kubectl get services
+          kubectl get ingress
