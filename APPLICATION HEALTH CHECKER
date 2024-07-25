@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Application URL
+APP_URL="http://abc.com" 
+
+# Log file
+LOG_FILE="/var/log/application_health.log"
+
+# Threshold for determining the application status
+SUCCESS_CODES=(200 301 302)  # HTTP status codes indicating the application is 'up'
+
+# Get current date and time
+timestamp() {
+  date +"%Y-%m-%d %H:%M:%S"
+}
+
+# Check application status
+check_application() {
+  response=$(curl -s -o /dev/null -w "%{http_code}" $APP_URL)
+  if [[ " ${SUCCESS_CODES[@]} " =~ " ${response} " ]]; then
+    echo "$(timestamp) - Application is UP (HTTP status code: $response)" >> $LOG_FILE
+  else
+    echo "$(timestamp) - ALERT: Application is DOWN (HTTP status code: $response)" >> $LOG_FILE
+  fi
+}
+
+# Main function
+main() {
+  echo "$(timestamp) - Starting application health check" >> $LOG_FILE
+  check_application
+  echo "$(timestamp) - Application health check completed" >> $LOG_FILE
+}
+
+# Run the main function
+main
